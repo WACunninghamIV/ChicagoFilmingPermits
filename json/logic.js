@@ -17,14 +17,14 @@ var layers = {
 
 // Create the map with our layers
 var map = L.map("map-id", {
-  center: [40.73, -74.0059],
+  center: [41.890426 -87.62367],
   zoom: 12,
   layers: [
-    layers.COMING_SOON,
-    layers.EMPTY,
-    layers.LOW,
-    layers.NORMAL,
-    layers.OUT_OF_ORDER
+    layers.COMPLETE,
+    layers.CANCELLED,
+    layers.FEE_PAYMENT,
+    layers.INCOMPLETE_APPLICATION,
+    // layers.OUT_OF_ORDER
   ]
 });
 
@@ -33,11 +33,11 @@ lightmap.addTo(map);
 
 // Create an overlays object to add to the layer control
 var overlays = {
-  "Coming Soon": layers.COMING_SOON,
-  "Empty Stations": layers.EMPTY,
-  "Low Stations": layers.LOW,
-  "Healthy Stations": layers.NORMAL,
-  "Out of Order": layers.OUT_OF_ORDER
+  "Complete": layers.COMPLETE,
+  "Cancelled": layers.CANCELLED,
+  "Fee Payment": layers.FEE_PAYMENT,
+  "Incomplete Application": layers.INCOMPLETE_APPLICATION,
+  // "Out of Order": layers.OUT_OF_ORDER
 };
 
 // Create a control for our layers, add our overlay layers to it
@@ -58,58 +58,59 @@ info.addTo(map);
 
 // Initialize an object containing icons for each layer group
 var icons = {
-  COMING_SOON: L.ExtraMarkers.icon({
+  COMPLETE: L.ExtraMarkers.icon({
     icon: "ion-settings",
     iconColor: "white",
     markerColor: "yellow",
     shape: "star"
   }),
-  EMPTY: L.ExtraMarkers.icon({
+  CANCELLED: L.ExtraMarkers.icon({
     icon: "ion-android-bicycle",
     iconColor: "white",
     markerColor: "red",
     shape: "circle"
   }),
-  OUT_OF_ORDER: L.ExtraMarkers.icon({
+  FEE_PAYMENT: L.ExtraMarkers.icon({
     icon: "ion-minus-circled",
     iconColor: "white",
     markerColor: "blue-dark",
     shape: "penta"
   }),
-  LOW: L.ExtraMarkers.icon({
+  INCOMPLETE_APPLICATION: L.ExtraMarkers.icon({
     icon: "ion-android-bicycle",
     iconColor: "white",
     markerColor: "orange",
     shape: "circle"
   }),
-  NORMAL: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
-    iconColor: "white",
-    markerColor: "green",
-    shape: "circle"
-  })
+  // NORMAL: L.ExtraMarkers.icon({
+  //   icon: "ion-android-bicycle",
+  //   iconColor: "white",
+  //   markerColor: "green",
+  //   shape: "circle"
+  // })
 };
 
 // Perform an API call to the Citi Bike Station Information endpoint
-d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_information.json").then(function(infoRes) {
+d3.json("./Data/FilmingPermitsJS.json").then(function(filming_data) {
+  console.log(filming_data)
 
   // When the first API call is complete, perform another call to the Citi Bike Station Status endpoint
   d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_status.json").then(function(statusRes) {
-    var updatedAt = infoRes.last_updated;
+    var updatedAt = filming_data.last_updated;
     var stationStatus = statusRes.data.stations;
     var stationInfo = infoRes.data.stations;
 
     // Create an object to keep of the number of markers in each layer
-    var stationCount = {
-      COMING_SOON: 0,
-      EMPTY: 0,
-      LOW: 0,
-      NORMAL: 0,
-      OUT_OF_ORDER: 0
+    var applicationCount = {
+      COMPLETE: 0,
+      CANCELLED: 0,
+      FEE_PAYMENT: 0,
+      INCOMPLETE_APPLICATION: 0,
+      // OUT_OF_ORDER: 0
     };
 
     // Initialize a stationStatusCode, which will be used as a key to access the appropriate layers, icons, and station count for layer group
-    var stationStatusCode;
+    var applicationStatusCode;
 
     // Loop through the stations (they're the same size and have partially matching data)
     for (var i = 0; i < stationInfo.length; i++) {
