@@ -91,14 +91,14 @@ var icons = {
 };
 
 // Perform an API call to the Citi Bike Station Information endpoint
-d3.json("./Data/FilmingPermitsJS.json").then(function(filming_data) {
+d3.json("FilmingPermitJS.json").then(function(filming_data) {
   console.log(filming_data)
 
   // When the first API call is complete, perform another call to the Citi Bike Station Status endpoint
-  d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_status.json").then(function(statusRes) {
-    var updatedAt = filming_data.last_updated;
-    var stationStatus = statusRes.data.stations;
-    var stationInfo = infoRes.data.stations;
+  // d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_status.json").then(function(statusRes) {
+   // var updatedAt = filming_data.last_updated;
+   // var stationStatus = statusRes.data.stations;
+   // var stationInfo = infoRes.data.stations;
 
     // Create an object to keep of the number of markers in each layer
     var applicationCount = {
@@ -155,7 +155,9 @@ d3.json("./Data/FilmingPermitsJS.json").then(function(filming_data) {
     // Call the updateLegend function, which will... update the legend!
     updateLegend(updatedAt, stationCount);
   });
-});
+
+
+
 
 // Update the legend's innerHTML with the last updated time and station count
 function updateLegend(time, stationCount) {
