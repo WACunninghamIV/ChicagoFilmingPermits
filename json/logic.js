@@ -1,3 +1,5 @@
+
+
 // Create the tile layer that will be the background of our map
 var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -8,23 +10,22 @@ var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{
 
 // Initialize all of the LayerGroups we'll be using
 var layers = {
-  COMING_SOON: new L.LayerGroup(),
-  EMPTY: new L.LayerGroup(),
-  LOW: new L.LayerGroup(),
-  NORMAL: new L.LayerGroup(),
-  OUT_OF_ORDER: new L.LayerGroup()
+  COMPLETE: new L.LayerGroup(),
+  CANCELLED: new L.LayerGroup(),
+  FEE_PAYMENT: new L.LayerGroup(),
+  INCOMPLETE_APPLICATION: new L.LayerGroup(),
+  // OUT_OF_ORDER: new L.LayerGroup()
 };
-
 // Create the map with our layers
-var map = L.map("map-id", {
-  center: [41.890426 -87.62367],
+var map = L.map("map", {
+  center: [41.890426, -87.62367],
   zoom: 12,
   layers: [
     layers.COMPLETE,
     layers.CANCELLED,
     layers.FEE_PAYMENT,
     layers.INCOMPLETE_APPLICATION,
-    // layers.OUT_OF_ORDER
+  //   layers.OUT_OF_ORDER
   ]
 });
 
@@ -36,8 +37,8 @@ var overlays = {
   "Complete": layers.COMPLETE,
   "Cancelled": layers.CANCELLED,
   "Fee Payment": layers.FEE_PAYMENT,
-  "Incomplete Application": layers.INCOMPLETE_APPLICATION,
-  // "Out of Order": layers.OUT_OF_ORDER
+  "Incomplete Application": layers.INCOMPLETE_APPLICATION
+//   // "Out of Order": layers.OUT_OF_ORDER
 };
 
 // Create a control for our layers, add our overlay layers to it
@@ -91,7 +92,7 @@ var icons = {
 };
 
 // Perform an API call to the Citi Bike Station Information endpoint
-d3.json("FilmingPermitJS.json").then(function(filming_data) {
+d3.json("json/FilmingPermitJS.json").then(function(filming_data) {
   console.log(filming_data)
 
   // When the first API call is complete, perform another call to the Citi Bike Station Status endpoint
@@ -100,60 +101,60 @@ d3.json("FilmingPermitJS.json").then(function(filming_data) {
    // var stationStatus = statusRes.data.stations;
    // var stationInfo = infoRes.data.stations;
 
-    // Create an object to keep of the number of markers in each layer
-    var applicationCount = {
-      COMPLETE: 0,
-      CANCELLED: 0,
-      FEE_PAYMENT: 0,
-      INCOMPLETE_APPLICATION: 0,
-      // OUT_OF_ORDER: 0
-    };
+    // // Create an object to keep of the number of markers in each layer
+    // var applicationCount = {
+    //   COMPLETE: 0,
+    //   CANCELLED: 0,
+    //   FEE_PAYMENT: 0,
+    //   INCOMPLETE_APPLICATION: 0,
+    //   // OUT_OF_ORDER: 0
+    // };
 
-    // Initialize a stationStatusCode, which will be used as a key to access the appropriate layers, icons, and station count for layer group
-    var applicationStatusCode;
+    // // Initialize a stationStatusCode, which will be used as a key to access the appropriate layers, icons, and station count for layer group
+    // var applicationStatusCode;
 
-    // Loop through the stations (they're the same size and have partially matching data)
-    for (var i = 0; i < stationInfo.length; i++) {
+    // // Loop through the stations (they're the same size and have partially matching data)
+    // for (var i = 0; i < stationInfo.length; i++) {
 
-      // Create a new station object with properties of both station objects
-      var station = Object.assign({}, stationInfo[i], stationStatus[i]);
-      // If a station is listed but not installed, it's coming soon
-      if (!station.is_installed) {
-        stationStatusCode = "COMING_SOON";
-      }
-      // If a station has no bikes available, it's empty
-      else if (!station.num_bikes_available) {
-        stationStatusCode = "EMPTY";
-      }
-      // If a station is installed but isn't renting, it's out of order
-      else if (station.is_installed && !station.is_renting) {
-        stationStatusCode = "OUT_OF_ORDER";
-      }
-      // If a station has less than 5 bikes, it's status is low
-      else if (station.num_bikes_available < 5) {
-        stationStatusCode = "LOW";
-      }
-      // Otherwise the station is normal
-      else {
-        stationStatusCode = "NORMAL";
-      }
+    //   // Create a new station object with properties of both station objects
+    //   var station = Object.assign({}, stationInfo[i], stationStatus[i]);
+    //   // If a station is listed but not installed, it's coming soon
+    //   if (!station.is_installed) {
+    //     stationStatusCode = "COMING_SOON";
+    //   }
+    //   // If a station has no bikes available, it's empty
+    //   else if (!station.num_bikes_available) {
+    //     stationStatusCode = "EMPTY";
+    //   }
+    //   // If a station is installed but isn't renting, it's out of order
+    //   else if (station.is_installed && !station.is_renting) {
+    //     stationStatusCode = "OUT_OF_ORDER";
+    //   }
+    //   // If a station has less than 5 bikes, it's status is low
+    //   else if (station.num_bikes_available < 5) {
+    //     stationStatusCode = "LOW";
+    //   }
+    //   // Otherwise the station is normal
+    //   else {
+    //     stationStatusCode = "NORMAL";
+    //   }
 
-      // Update the station count
-      stationCount[stationStatusCode]++;
-      // Create a new marker with the appropriate icon and coordinates
-      var newMarker = L.marker([station.lat, station.lon], {
-        icon: icons[stationStatusCode]
-      });
+    //   // Update the station count
+    //   stationCount[stationStatusCode]++;
+    //   // Create a new marker with the appropriate icon and coordinates
+    //   var newMarker = L.marker([station.lat, station.lon], {
+    //     icon: icons[stationStatusCode]
+    //   });
 
-      // Add the new marker to the appropriate layer
-      newMarker.addTo(layers[stationStatusCode]);
+    //   // Add the new marker to the appropriate layer
+    //   newMarker.addTo(layers[stationStatusCode]);
 
-      // Bind a popup to the marker that will  display on click. This will be rendered as HTML
-      newMarker.bindPopup(station.name + "<br> Capacity: " + station.capacity + "<br>" + station.num_bikes_available + " Bikes Available");
-    }
+    //   // Bind a popup to the marker that will  display on click. This will be rendered as HTML
+    //   newMarker.bindPopup(station.name + "<br> Capacity: " + station.capacity + "<br>" + station.num_bikes_available + " Bikes Available");
+    // }
 
-    // Call the updateLegend function, which will... update the legend!
-    updateLegend(updatedAt, stationCount);
+    // // Call the updateLegend function, which will... update the legend!
+    // updateLegend(updatedAt, stationCount);
   });
 
 
