@@ -106,19 +106,19 @@ d3.json("json/FilmingPermitJS.json").then(function(filming_data) {
   console.log(filming_data)
 
   // When the first API call is complete, perform another call to the Citi Bike Station Status endpoint
-  // d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_status.json").then(function(statusRes) {
-   // var updatedAt = filming_data.last_updated;
-   // var stationStatus = statusRes.data.stations;
-   // var stationInfo = infoRes.data.stations;
+  
+   
+   var appStatus = statuses.data.stations;
+   var appInfo = filming_data.data.stations;
 
     // // Create an object to keep of the number of markers in each layer
-    // var applicationCount = {
-    //   COMPLETE: 0,
-    //   CANCELLED: 0,
-    //   FEE_PAYMENT: 0,
-    //   INCOMPLETE_APPLICATION: 0,
-    //   // OUT_OF_ORDER: 0
-    // };
+    var applicationCount = {
+      COMPLETE: 0,
+      CANCELLED: 0,
+      FEE_PAYMENT: 0,
+      INCOMPLETE_APPLICATION: 0,
+      // OUT_OF_ORDER: 0
+    };
 
     // // Initialize a stationStatusCode, which will be used as a key to access the appropriate layers, icons, and station count for layer group
     // var applicationStatusCode;
