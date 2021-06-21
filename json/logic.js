@@ -14,7 +14,8 @@ var layers = {
   CANCELLED: new L.LayerGroup(),
   FEE_PAYMENT: new L.LayerGroup(),
   INCOMPLETE_APPLICATION: new L.LayerGroup(),
-  // OUT_OF_ORDER: new L.LayerGroup()
+  DENIED: new L.LayerGroup(),
+  APPLICATION_IN_REVIEW: new L.LayerGroup()
 };
 // Create the map with our layers
 var map = L.map("map", {
@@ -25,7 +26,8 @@ var map = L.map("map", {
     layers.CANCELLED,
     layers.FEE_PAYMENT,
     layers.INCOMPLETE_APPLICATION,
-  //   layers.OUT_OF_ORDER
+    layers.DENIED, 
+    layers.APPLICATION_IN_REVIEW,
   ]
 });
 
@@ -37,7 +39,9 @@ var overlays = {
   "Complete": layers.COMPLETE,
   "Cancelled": layers.CANCELLED,
   "Fee Payment": layers.FEE_PAYMENT,
-  "Incomplete Application": layers.INCOMPLETE_APPLICATION
+  "Incomplete Application": layers.INCOMPLETE_APPLICATION,
+  "Denied": layers.DENIED,
+  "Application in Review": layers.APPLICATION_IN_REVIEW
 //   // "Out of Order": layers.OUT_OF_ORDER
 };
 
@@ -83,12 +87,18 @@ var icons = {
     markerColor: "orange",
     shape: "circle"
   }),
-  // NORMAL: L.ExtraMarkers.icon({
-  //   icon: "ion-android-bicycle",
-  //   iconColor: "white",
-  //   markerColor: "green",
-  //   shape: "circle"
-  // })
+  DENIED: L.ExtraMarkers.icon({
+    icon: "ion-android-bicycle",
+    iconColor: "white",
+    markerColor: "green",
+    shape: "circle"
+  }),
+  APPLICATION_IN_REVIEW: L.ExtraMarkers.icon({
+    icon: "ion-android-bicycle",
+    iconColor: "white",
+    markerColor: "pink",
+    shape: "circle"
+  })
 };
 
 // Perform an API call to the Citi Bike Station Information endpoint
