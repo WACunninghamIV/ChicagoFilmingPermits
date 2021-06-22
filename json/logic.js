@@ -63,11 +63,7 @@ info.addTo(map);
 
 // Initialize an object containing icons for each layer group
 var icons = {
-  COMPLETE: L.ExtraMarkers.icon({
-    icon:"",
-    markerColor: "yellow",
-    shape: "star"
-  }),
+  COMPLETE: L.green_star,
   CANCELLED: L.ExtraMarkers.icon({
     icon: "ion-android-bicycle",
     iconColor: "white",
