@@ -64,8 +64,7 @@ info.addTo(map);
 // Initialize an object containing icons for each layer group
 var icons = {
   COMPLETE: L.ExtraMarkers.icon({
-    icon: "ion-settings",
-    iconColor: "white",
+    icon:"",
     markerColor: "yellow",
     shape: "star"
   }),
@@ -102,13 +101,13 @@ var icons = {
 };
 
 // Perform an API call to the Citi Bike Station Information endpoint
-d3.json("json/FilmingPermitJS.json").then(function(filming_data) {
+d3.json("json/data_json.json").then(function(filming_data) {
   console.log(filming_data)
 
   // When the first API call is complete, perform another call to the Citi Bike Station Status endpoint
   
    
-   var appStatus = filming_data.meta.view.columns;
+   var appStatus = filming_data.CURRENTMILESTONE;
 
     // // Create an object to keep of the number of markers in each layer
     var appCount = {
@@ -124,64 +123,64 @@ d3.json("json/FilmingPermitJS.json").then(function(filming_data) {
     var appStatus;
 
     // // Loop through the stations (they're the same size and have partially matching data)
-    for (var i = 0; i < appStatus.length; i++) {
+    for (var i = 0; i < appStatus; i++) {
 
       // Create a new station object with properties of both station objects
       var station = Object.assign({}, appStatus[i]);
       // If a station is listed but not installed, it's coming soon
-      if (!station.is_installed) {
-        stationStatusCode = "COMPLETE";
+      if (filming_data.CURRENTMILESTONE = "COMPLETE") {
+        appStatus = "COMPLETE";
       }
-      // If a station has no bikes available, it's empty
-      else if (!station.num_bikes_available) {
-        stationStatusCode = "CANCELLED";
-      }
-      // If a station is installed but isn't renting, it's out of order
-      else if (station.is_installed && !station.is_renting) {
-        stationStatusCode = "FEE PAYMENT";
-      }
-      // If a station has less than 5 bikes, it's status is low
-      else if (station.num_bikes_available < 5) {
-        stationStatusCode = "INCOMPLETE APPLICATION";
-      }
-      // If a station has less than 5 bikes, it's status is low
-      else if (station.num_bikes_available < 5) {
-        stationStatusCode = "DENIED";
-      }
-      // Otherwise the station is normal
-      else {
-        stationStatusCode = "APPLICATION IN REVIEW";
-      }
+      // // If a station has no bikes available, it's empty
+      // else if (!station.num_bikes_available) {
+      //   stationStatusCode = "CANCELLED";
+      // }
+      // // If a station is installed but isn't renting, it's out of order
+      // else if (station.is_installed && !station.is_renting) {
+      //   stationStatusCode = "FEE PAYMENT";
+      // }
+      // // If a station has less than 5 bikes, it's status is low
+      // else if (station.num_bikes_available < 5) {
+      //   stationStatusCode = "INCOMPLETE APPLICATION";
+      // }
+      // // If a station has less than 5 bikes, it's status is low
+      // else if (station.num_bikes_available < 5) {
+      //   stationStatusCode = "DENIED";
+      // }
+      // // Otherwise the station is normal
+      // else {
+      //   stationStatusCode = "APPLICATION IN REVIEW";
+      // }
 
       // Update the station count
-      appCount[stationStatusCode]++;
+      appCount[appStatus]++;
       // Create a new marker with the appropriate icon and coordinates
-      var newMarker = L.marker([station.lat, station.lon], {
-        icon: icons[stationStatusCode]
+      var newMarker = L.marker([filming_data.LATITUDE, filming_data.LONGITUDE], {
+        icon: icons[appStatus]
       });
 
       // Add the new marker to the appropriate layer
-      newMarker.addTo(layers[stationStatusCode]);
+      newMarker.addTo(layers[appStatus]);
 
       // Bind a popup to the marker that will  display on click. This will be rendered as HTML
-      newMarker.bindPopup(station.name + "<br> Capacity: " + station.capacity + "<br>" + station.num_bikes_available + " Bikes Available");
+      // newMarker.bindPopup(station.name + "<br> Capacity: " + station.capacity + "<br>" + station.num_bikes_available + " Bikes Available");
     }
 
     // Call the updateLegend function, which will... update the legend!
-    updateLegend(updatedAt, stationCount);
+    // updateLegend(updatedAt, stationCount);
   });
 
 
 
 
-// Update the legend's innerHTML with the last updated time and station count
-function updateLegend(time, stationCount) {
-  document.querySelector(".legend").innerHTML = [
-    "<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
-    "<p class='out-of-order'>Out of Order Stations: " + stationCount.OUT_OF_ORDER + "</p>",
-    "<p class='coming-soon'>Stations Coming Soon: " + stationCount.COMING_SOON + "</p>",
-    "<p class='empty'>Empty Stations: " + stationCount.EMPTY + "</p>",
-    "<p class='low'>Low Stations: " + stationCount.LOW + "</p>",
-    "<p class='healthy'>Healthy Stations: " + stationCount.NORMAL + "</p>"
-  ].join("");
-}
+// // Update the legend's innerHTML with the last updated time and station count
+// function updateLegend(time, stationCount) {
+//   document.querySelector(".legend").innerHTML = [
+//     "<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
+//     "<p class='out-of-order'>Out of Order Stations: " + stationCount.OUT_OF_ORDER + "</p>",
+//     "<p class='coming-soon'>Stations Coming Soon: " + stationCount.COMING_SOON + "</p>",
+//     "<p class='empty'>Empty Stations: " + stationCount.EMPTY + "</p>",
+//     "<p class='low'>Low Stations: " + stationCount.LOW + "</p>",
+//     "<p class='healthy'>Healthy Stations: " + stationCount.NORMAL + "</p>"
+//   ].join("");
+// }
