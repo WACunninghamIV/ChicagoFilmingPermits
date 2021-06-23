@@ -1,14 +1,23 @@
 body {
-    padding: 0;
-    margin: 0;
-  }
-  
-  #map,
-  body,
-  html {
-    height: 100%;
-  }
-  
-  .leaflet-popup-content {
-    text-align: center;
-  }
+  padding: 0;
+  margin: 0;
+}
+#map,
+body,
+html {
+  height: 100%;
+}
+.leaflet-popup-content {
+  text-align: center;
+}
+.green-star {
+}
+.green-star:before {
+    content: "";
+    display: block;
+    background: url("/19-Project-2/img/green_star.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
