@@ -13,7 +13,7 @@ var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{
 //   INCOMPLETE_APPLICATION: new L.LayerGroup(),
 //   DENIED: new L.LayerGroup(),
 //   APPLICATION_IN_REVIEW: new L.LayerGroup()
-};
+// };
 // Create the map with our layers
 var map = L.map("map", {
   center: [41.890426, -87.62367],
@@ -34,7 +34,7 @@ lightmap.addTo(map);
 var marker = L.marker([41.8529497,-87.7120706], {
     draggable: false,
     title: "SHAMELESS Gallagher House"
-  }).addTo(myMap);
+  }).addTo(map);
   
   // Binding a pop-up to our marker
   marker.bindPopup("SHAMELESS");
