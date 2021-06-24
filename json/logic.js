@@ -153,6 +153,22 @@ d3.json("json/data_json.json").then(function(filming_data) {
       // Bind a popup to the marker that will  display on click. This will be rendered as HTML
       // newMarker.bindPopup(station.name + "<br> Capacity: " + station.capacity + "<br>" + station.num_bikes_available + " Bikes Available");
     }
+
+    document.querySelector(".legend").innerHTML = [
+      "<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
+      "<p class='out-of-order'>Out of Order Stations: " + stationCount.OUT_OF_ORDER + "</p>",
+      "<p class='coming-soon'>Stations Coming Soon: " + stationCount.COMING_SOON + "</p>",
+      "<p class='FEE_PAYMENT'>FEE_PAYMENT: " + filming_data[i].LATITUDE + filming_data[i].LONGITUDE + "</p>",
+      "<p class='low'>Low Stations: " + stationCount.LOW + "</p>",
+      "<p class='healthy'>Healthy Stations: " + stationCount.NORMAL + "</p>"
+      ].join("");
+
+//     onEachFeature: function(feature, layer) {
+//       layer.bindPopup(
+//           "<h4 style='text-align:center;'>" + new Date(feature.properties.time) +
+//           "</h4> <hr> <h5 style='text-align:center;'>" + feature.properties.title + "</h5>" + "magnitude=" +feature.properties.mag);
+//   }
+// }).addTo(map);
     // var layers = {
     //   COMPLETE: new L.LayerGroup(),
     //   CANCELLED: new L.LayerGroup(),
@@ -166,12 +182,5 @@ d3.json("json/data_json.json").then(function(filming_data) {
   });
 // // Update the legend's innerHTML with the last updated time and station count
 // function updateLegend(time, stationCount) {
-//   document.querySelector(".legend").innerHTML = [
-//     "<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
-//     "<p class='out-of-order'>Out of Order Stations: " + stationCount.OUT_OF_ORDER + "</p>",
-//     "<p class='coming-soon'>Stations Coming Soon: " + stationCount.COMING_SOON + "</p>",
-//     "<p class='empty'>Empty Stations: " + stationCount.EMPTY + "</p>",
-//     "<p class='low'>Low Stations: " + stationCount.LOW + "</p>",
-//     "<p class='healthy'>Healthy Stations: " + stationCount.NORMAL + "</p>"
-//   ].join("");
+
 // }
