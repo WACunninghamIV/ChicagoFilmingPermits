@@ -16,13 +16,13 @@ var map = L.map("map", {
 lightmap.addTo(map);
 // Create a new marker
 // Pass in some initial options, and then add it to the map using the addTo method
-var marker = L.marker([41.8529497,-87.7120706], {
+var marker = L.marker([41.8594216,-87.6927425], {
     draggable: false,
-    title: "SHAMELESS Gallagher House"
+    title: "Cinespace Studios"
   }).addTo(map);
   
   // Binding a pop-up to our marker
-  marker.bindPopup("SHAMELESS");
+  marker.bindPopup("Cinespace Studios");
   
 var info = L.control({
   position: "bottomright"

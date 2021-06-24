@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-img {
+image {
   padding: 30;
 }
 
@@ -21,7 +21,12 @@ h1 { font-family: "Copperplate Gothic Light"; font-size: 50px; font-style: norma
 h3 {
   font-size: 30px;
 }
-
+/* .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+ } */
 /* Giving our navbar some padding and a background color */
 .navbar {
   margin-right: 0px;
