@@ -62,28 +62,28 @@ var icons = {
     svg: true
   }),
   CANCELLED: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
+    icon: "red-star",
     iconColor: "white",
-    markerColor: "red",
-    shape: "circle"
+    markerColor: "white",
+    shape: "square"
   }),
   FEE_PAYMENT: L.ExtraMarkers.icon({
-    icon: "ion-minus-circled",
+    icon: "purple-star",
     iconColor: "white",
-    markerColor: "blue-dark",
-    shape: "penta"
+    markerColor: "white",
+    shape: "square"
   }),
   INCOMPLETE_APPLICATION: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
+    icon: "blue-star",
     iconColor: "white",
-    markerColor: "orange",
-    shape: "circle"
+    markerColor: "white",
+    shape: "square"
   }),
   DENIED: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
+    icon: "orange-star",
     iconColor: "white",
-    markerColor: "green",
-    shape: "circle"
+    markerColor: "white",
+    shape: "square"
   }),
   APPLICATION_IN_REVIEW: L.ExtraMarkers.icon({
     icon: "ion-android-bicycle",
@@ -109,7 +109,7 @@ d3.json("json/data_json.json").then(function(filming_data) {
     // // Initialize a stationStatusCode, which will be used as a key to access the appropriate layers, icons, and station count for layer group
     let appStatus = undefined;
     // // Loop through the stations (they're the same size and have partially matching data)
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 2000; i++) {
       appStatus = filming_data[i].CURRENTMILESTONE;
       console.log(i, appStatus, filming_data[i].LATITUDE, filming_data[i].LONGITUDE);
       // Create a new station object with properties of both station objects

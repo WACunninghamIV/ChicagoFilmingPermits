@@ -21,3 +21,51 @@ html {
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
+
+.red-star {
+}
+.red-star:before {
+    content: "";
+    display: block;
+    background: url("/19-Project-2/img/red_star.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.purple-star {
+}
+.purple-star:before {
+    content: "";
+    display: block;
+    background: url("/19-Project-2/img/purple_star.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.blue-star {
+}
+.blue-star:before {
+    content: "";
+    display: block;
+    background: url("/19-Project-2/img/blue_star.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.orange-star {
+}
+.orange-star:before {
+    content: "";
+    display: block;
+    background: url("/19-Project-2/img/orange_star.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
