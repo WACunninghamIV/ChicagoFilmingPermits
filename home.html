@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=
     , initial-scale=1.0">
     <title>Chicago Filming Permits</title>
-    <body style="background-color:grey;">
+    <body style="background-color:black;">
     </body>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -15,10 +15,15 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+       box-sizing: border-box;
       }
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
     </style>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- <a class="navbar-brand" href="#">Navbar</a> -->
@@ -28,10 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="Home.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Map</a>
+              <a class="nav-link" href="map.html">Map</a>
             </li>
             </li>
           </ul>
@@ -42,44 +47,45 @@
         <div class="row">
           <div class="col-md-12">
             <br>
-            <h1>Chicago Filming Permits</h1>
+              <h1 style="color:white;">Chicago Filming Permits</h1>
             <br>
-            <article>            
-              <p>For this project, we looked at different filming permits and their application status throughout Chicago.  Our group constructed a map of the
-                different statuses and locations.
+            <article>
+              <div style="background-color:black;color:white;border: 12px dashed white; border: 6px dashed white;padding:18px;"><h5>For this project, we looked at different filming permits and their application status throughout Chicago.  Our group constructed a map of the
+                different statuses and locations.  Filming permits in the city allow anyone to stop traffic around a designated area in order to film the desired project, whether it is a movie or class project. <br>
               <br>
-                We also took some of the most popular filming spots in Chicago and scraped for pictures of the popular locations.</p>
-            </article>
+                Below are some popular filming locations in Chicago that we wanted to highlight.</p>
+              </h5> </article>
+              <br>
           </div>
-        <div class="col-md-24">
+          
+        <div class="col-md-12">
           <div class="box">
-              <h3>Visualizations</h3>
+              <h3 style="color:white;">Visualizations</h3>
               <hr>
                   <div class= "container">
                     <div class="row" style="padding-bottom: 100px;">
-                      <div class="col-md-12">
+                      <div class="col-md-4">
                         <a target="_blank" href="shameless.html">
-                          <img src="shameless_house.jpeg" alt="Shameless House" height="300" width="300"> 
+                          <img src="shameless_house.jpeg" alt="Shameless House" height="300" width="300">
                         </a>
                         <br>
-                      </div> 
-                  <div class= "col-md-12">
+                      </div>
+                  <div class= "col-md-4">
                         <a target="_blank" href="chi_med.html">
                           <img src="chicago_med.jpeg" alt="Chicago Med" height="300" width="300">
                         </a>
                         <br>
-                      </div> 
+                      </div>
                   <!-- <div class="row" style="padding-bottom: 30px;"> -->
-                    <div class= "col-md-12">
+                    <div class= "col-md-4">
                       <a target="_blank" href="cinespace.html">
                         <img src="cinespace.jpeg" alt="Cinespace Studios" height="300" width="300">
                       </a>
-                </div> 
+                </div>
           </div>
         </div>
       </div>
   </div>
-
     </section>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
