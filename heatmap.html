@@ -22,8 +22,8 @@
 
 	var map = L.map('map', {doubleClickZoom: false})
 	.setView([
-		35.10418,
-		-106.62987],
+        41.890426, 
+        -87.62367],
 		10);
 
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
@@ -31,10 +31,15 @@
 
 	var points = [];
 
-	var heat = L.heatLayer(points, {
-		maxZoom: 10
-	})
+
+
+	var heat = L.heatLayer("json/data_json.json")
+    // {
+	// 	maxZoom: 10
+	// })
 	.addTo(map);
+
+
 
 	function addpoint(e){
 		heat.addLatLng(e.latlng);
